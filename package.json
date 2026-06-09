@@ -1,0 +1,20 @@
+{
+  "name": "xxx-tentacles",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "3x your X.com with a swarm of autonomous agents. Tentacle 1: the Interrogator.",
+  "scripts": {
+    "interrogate": "tsx src/interrogator.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.67.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "@types/node": "^22.7.4"
+  }
+}

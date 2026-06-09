@@ -1,42 +1,49 @@
-# KAYFABE
+# xXx-tentacles
 
-### Every actor in Hollywood has a manager who builds their fame. You have a timeline and a prayer.
+### 3x your X.com — with agents that wrap around everything.
 
-Not anymore.
+You've got two hands and one timeline. **xXx-tentacles gives you tentacles** — a swarm of autonomous AI agents that run your X.com like a Hollywood studio runs a star. Each tentacle grips a different lever: one gets to know you, one runs the show, one writes the posts, one watches the numbers and squeezes harder where it's working.
 
-**KAYFABE is an autonomous AI manager that runs your Twitter like a Hollywood handler runs a star.** It doesn't suggest. It doesn't "help you brainstorm." It runs the show — profiling you to the bone, manufacturing the drama, writing the posts, picking the fights, and shipping on a schedule while you sleep.
-
-Its only incentive is your growth. If you don't blow up, it doesn't survive.
+You don't manage them. They manage *you* — toward one outcome: **you, 3x bigger.**
 
 ---
 
 ## The uncomfortable truth
 
-Social media doesn't reward nuance. It rewards **extremes.**
+X.com doesn't reward nuance. It rewards **extremes.**
 
-Politics, tech, movies, takes — nothing goes viral by being measured and fair. The timeline is a knife fight, and "I want to please everyone" is how you stay at 200 followers forever. Everybody is there to fuck with each other. The accounts that win figured that out.
+Politics, tech, movies, takes — nothing goes viral by being measured and fair. The timeline is a knife fight, and "I want to please everyone" is how you stay at 200 followers forever. Everybody's there to fuck with each other. The accounts that win figured that out.
 
-Most "growth tools" hand you a content calendar and a pat on the head. KAYFABE hands you a manager who's seen a thousand careers die from politeness — and refuses to let yours be next.
+Most "growth tools" hand you a content calendar and a pat on the head. xXx-tentacles hands you a pit of agents that have watched a thousand careers die from politeness — and refuse to let yours be next.
 
 ---
 
-## How it works
+## The tentacles
 
-### 1. The Interrogation
-Before it can sell you, it has to *know* you. KAYFABE puts you in the chair and goes to work — roasting, profiling, prying. Your politics. Your taste. Your ego. Your vices. The stuff you'd never say at a dinner party.
+Every tentacle is an autonomous agent. Together they're your studio.
 
-It keeps drilling, rating itself **0 to 10** on how well it gets you, and it does **not** stop until it hits a 10 — that *"fuck, I get this guy"* moment. You'll feel naked. That's the point. A manager that doesn't know your edges can't sharpen them.
+### 🐙 Tentacle 1 — The Interrogator *(live)*
+Before anything can sell you, it has to *know* you. This one puts you in the chair and goes to work — roasting, profiling, prying. Your politics. Your taste. Your ego. Your vices. The stuff you'd never say at a dinner party.
 
-### 2. The Show
-Out of the interrogation comes a living dossier — your voice, your angles, your enemies, your lanes. From there KAYFABE becomes a show runner:
+It keeps drilling, rating itself **0 to 10** on how well it gets you, and it does **not** stop until it hits a 10 — that *"fuck, I get this guy"* moment. You'll feel naked. That's the point. A tentacle that doesn't know your edges can't sharpen them.
 
-- **Manufactures theatrics** — recurring bits, slow-burn arcs, the right beef at the right time.
-- **Rides the extremes** — latches your takes onto whatever's already on fire.
-- **Writes in your voice** — sharper, louder, more you than you'd dare to be.
-- **Ships relentlessly** — the right post, the right hour, every day.
+### 🐙 Tentacle 2 — The Show Runner
+Turns everything it learned into a living plan: recurring bits, slow-burn arcs, the right beef at the right time. It manufactures the theatrics that the timeline can't look away from.
 
-### 3. The Feedback Loop
-KAYFABE watches what actually lands — real engagement, real numbers, no self-congratulation. What flops gets dissected. What hits gets doubled down. It gets meaner, smarter, and more *you* with every cycle. It's not a tool you use once. It's a manager that learns your audience better than you do.
+### 🐙 Tentacle 3 — The Writer
+Writes in your voice — sharper, louder, more *you* than you'd dare to be. Rides whatever's already on fire and ships the spiciest version, every day, at the right hour.
+
+### 🐙 Tentacle 4 — The Analyst
+Watches what actually lands — real engagement, real numbers, no self-congratulation. What flops gets dissected. What hits gets doubled down. The whole swarm gets meaner and smarter with every cycle.
+
+---
+
+## Why "tentacles"
+
+Because growth isn't one move — it's a dozen, all at once, all the time. One agent is a chatbot. A *swarm* of specialized agents, each gripping a different part of your presence and pulling in the same direction, is a machine. That's the 3x.
+
+You bring the raw material — a person worth paying attention to.
+The tentacles make the world pay attention.
 
 ---
 
@@ -54,10 +61,12 @@ KAYFABE watches what actually lands — real engagement, real numbers, no self-c
 
 ---
 
-## The deal
+## Status
 
-You bring the raw material — a person worth paying attention to.
-KAYFABE brings the manager who makes the world pay attention.
+- **Tentacle 1 — The Interrogator:** ✅ live · `npm run interrogate`
+- **Tentacle 2 — The Show Runner:** 🔜
+- **Tentacle 3 — The Writer:** 🔜
+- **Tentacle 4 — The Analyst:** 🔜
 
 No feelings spared. No nuance wasted. Just growth, over and over again.
 
@@ -65,8 +74,4 @@ No feelings spared. No nuance wasted. Just growth, over and over again.
 
 ---
 
-> *Kayfabe (n.) — the staged, scripted drama presented as real to captivate an audience. The oldest trick in entertainment. Now it works for you.*
-
----
-
-<sub>⚠️ KAYFABE is built to be brutal, not reckless. It pushes hard on edge and extremes — it won't push you off a cliff that gets you banned. Survival means you keep growing, not flame out in a week.</sub>
+<sub>⚠️ Built to be brutal, not reckless. The tentacles push hard on edge and extremes — they won't push you off a cliff that gets you banned. 3x means you keep growing, not flame out in a week.</sub>
