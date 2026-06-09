@@ -6,7 +6,8 @@
   "description": "3x your X.com with a swarm of autonomous agents. Tentacle 1: the Interrogator.",
   "scripts": {
     "interrogate": "tsx src/interrogator.ts",
-    "showrun": "tsx src/showrunner.ts"
+    "showrun": "tsx src/showrunner.ts",
+    "write": "tsx src/writer.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

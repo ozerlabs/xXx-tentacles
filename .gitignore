@@ -13,6 +13,7 @@ out/
 *.log
 dossier.json
 showplan.json
+posted.json
 
 # os / editor
 .DS_Store

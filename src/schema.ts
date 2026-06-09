@@ -104,17 +104,34 @@ export const BeatDraftSchema = z.object({
 export type BeatDraft = z.infer<typeof BeatDraftSchema>;
 
 /** A fully-resolved slot: the beat plus its chosen post and the runners-up. */
-export type Slot = Beat & {
-  chosen: PostCandidate;
-  alternates: PostCandidate[];
-  reasoning: string;
-};
+export const SlotSchema = BeatSchema.extend({
+  chosen: PostCandidateSchema,
+  alternates: z.array(PostCandidateSchema),
+  reasoning: z.string(),
+});
+export type Slot = z.infer<typeof SlotSchema>;
 
 /** The finished plan written to showplan.json. */
-export type ShowPlan = {
-  arc: string;
-  slots: Slot[];
-};
+export const ShowPlanSchema = z.object({
+  arc: z.string(),
+  slots: z.array(SlotSchema),
+});
+export type ShowPlan = z.infer<typeof ShowPlanSchema>;
+
+// ── Tentacle 3: The Writer ────────────────────────────────────────────────────
+
+/** One line in the posted log — what went out (or would have), when. */
+export const PostedItemSchema = z.object({
+  day: z.string(),
+  type: z.string(),
+  topic: z.string(),
+  scheduled_for: z.string().describe("ISO timestamp the post is slotted for"),
+  text: z.string(),
+  status: z.string().describe("e.g. 'posted (dry-run)'"),
+  id: z.string(),
+  url: z.string(),
+});
+export type PostedItem = z.infer<typeof PostedItemSchema>;
 
 // ──────────────────────────────────────────────────────────────────────────────
 
