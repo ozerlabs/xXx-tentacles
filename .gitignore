@@ -1,0 +1,19 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# deps & build
+node_modules/
+dist/
+.next/
+out/
+
+# logs & local data
+*.log
+dossier.json
+
+# os / editor
+.DS_Store
+.vscode/
+.idea/
