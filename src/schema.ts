@@ -130,8 +130,55 @@ export const PostedItemSchema = z.object({
   status: z.string().describe("e.g. 'posted (dry-run)'"),
   id: z.string(),
   url: z.string(),
+  /** What the Show Runner PREDICTED — so the Analyst can grade prediction vs reality. */
+  predicted_virality: z.number().min(0).max(10),
+  on_voice: z.number().min(0).max(10),
 });
 export type PostedItem = z.infer<typeof PostedItemSchema>;
+
+// ── Tentacle 4: The Analyst ───────────────────────────────────────────────────
+
+/** Raw engagement numbers for a post. The ground truth — never invented by the LLM. */
+export const EngagementSchema = z.object({
+  impressions: z.number(),
+  likes: z.number(),
+  reposts: z.number(),
+  replies: z.number(),
+  quotes: z.number(),
+});
+export type Engagement = z.infer<typeof EngagementSchema>;
+
+/** A post plus its measured numbers and the scores WE compute (not the model). */
+export type ScoredPost = {
+  id: string;
+  type: string;
+  topic: string;
+  text: string;
+  predicted_virality: number;
+  engagement: Engagement;
+  /** (likes + 2·reposts + 1.5·replies + 2·quotes) / impressions, ×100. */
+  engagement_rate: number;
+  /** Measured virality on the same 0–10 scale, for predicted-vs-actual. */
+  actual_virality: number;
+};
+
+/**
+ * The Analyst's Reflexion output — read off the numbers, then directives that
+ * steer next week's Show Runner. This is the feedback that closes the loop.
+ */
+export const ReflectionSchema = z.object({
+  summary: z.string().describe("brutal one-paragraph verdict on the week's numbers"),
+  what_worked: z.array(z.string()),
+  what_flopped: z.array(z.string()),
+  patterns: z.array(z.string()).describe("e.g. 'beefs outperform flexes 3:1', 'predicted hits underdelivered'"),
+  directives: z.object({
+    double_down: z.array(z.string()).describe("beat types / topics / angles to push harder next week"),
+    cut: z.array(z.string()).describe("what to stop doing"),
+    voice_notes: z.array(z.string()).describe("tweaks to how it sounds"),
+  }),
+  next_week_focus: z.string(),
+});
+export type Reflection = z.infer<typeof ReflectionSchema>;
 
 // ──────────────────────────────────────────────────────────────────────────────
 

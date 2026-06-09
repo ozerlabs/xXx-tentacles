@@ -86,6 +86,8 @@ async function main() {
       status: LIVE ? "posted (live)" : "posted (dry-run)",
       id: result.id,
       url: result.url,
+      predicted_virality: slot.chosen.virality,
+      on_voice: slot.chosen.on_voice,
     });
 
     console.log(`  ${green("✓")} ${cyan(fmt(when))}  ${dim(`${slot.type} · v${slot.chosen.virality}/10`)}`);

@@ -98,11 +98,18 @@ async function main() {
   const dossier = DossierSchema.parse(JSON.parse(readFileSync(DOSSIER_PATH, "utf8")));
   console.log(dim(`  Client loaded → ${dossier.identity || "(unnamed)"}\n`));
 
+  // Reflexion loop: if the Analyst has run, plan against last week's learnings.
+  let learnings = "";
+  if (existsSync("learnings.json")) {
+    learnings = `\n\nLAST WEEK'S LEARNINGS — apply these, the numbers don't lie:\n${readFileSync("learnings.json", "utf8")}`;
+    console.log(dim("  Found learnings.json — planning against last week's numbers."));
+  }
+
   // 1. Plan the week (the arc + beats).
   console.log(dim("  Breaking the week..."));
   const week = await callJSON(
     SHOW_PLANNER_PROMPT,
-    `CLIENT DOSSIER:\n${JSON.stringify(dossier, null, 2)}`,
+    `CLIENT DOSSIER:\n${JSON.stringify(dossier, null, 2)}${learnings}`,
     1.0,
     WeekPlanSchema
   );
