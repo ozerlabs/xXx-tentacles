@@ -46,7 +46,7 @@ Every tentacle is an autonomous agent. Together they're your studio.
 | | Tentacle | What it grips | Status |
 |---|---|---|---|
 | 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | ✅ **live** |
-| 🐙 | **The Show Runner** | Turns the profile into a plan — recurring bits, slow-burn arcs, the right beef at the right time. | 🔜 |
+| 🐙 | **The Show Runner** | Plans the week as a narrative arc, then Tree-of-Thoughts the spiciest post per beat. | ✅ **live** |
 | 🐙 | **The Writer** | Posts in your voice — sharper, louder, more *you* than you'd dare. Every day, the right hour. | 🔜 |
 | 🐙 | **The Analyst** | Watches real engagement. Kills what flops, doubles down on what hits. | 🔜 |
 
@@ -76,11 +76,14 @@ npm install
 # 2. add your key
 cp .env.example .env        # then paste your DEEPSEEK_API_KEY
 
-# 3. sit in the chair
+# 3. sit in the chair (Tentacle 1)
 npm run interrogate
+
+# 4. run the writers' room (Tentacle 2)
+npm run showrun
 ```
 
-> The interrogation runs until the agent hits **10/10** on you, then writes `dossier.json`. Type `quit` to walk out early (your funeral).
+> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles.
 
 ---
 
@@ -124,7 +127,7 @@ That's the **3x**. You bring the raw material — a person worth paying attentio
 ## 🗺️ Roadmap
 
 - [x] 🐙 **Tentacle 1 — The Interrogator** · `npm run interrogate`
-- [ ] 🐙 **Tentacle 2 — The Show Runner**
+- [x] 🐙 **Tentacle 2 — The Show Runner** · `npm run showrun`
 - [ ] 🐙 **Tentacle 3 — The Writer**
 - [ ] 🐙 **Tentacle 4 — The Analyst**
 
