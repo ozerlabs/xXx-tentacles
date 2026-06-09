@@ -47,7 +47,7 @@ Every tentacle is an autonomous agent. Together they're your studio.
 |---|---|---|---|
 | 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | ✅ **live** |
 | 🐙 | **The Show Runner** | Plans the week as a narrative arc, then Tree-of-Thoughts the spiciest post per beat. | ✅ **live** |
-| 🐙 | **The Writer** | Posts in your voice — sharper, louder, more *you* than you'd dare. Every day, the right hour. | 🔜 |
+| 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. Dry-run today; `--live` wires to X. | ✅ **live** |
 | 🐙 | **The Analyst** | Watches real engagement. Kills what flops, doubles down on what hits. | 🔜 |
 
 <details>
@@ -81,9 +81,12 @@ npm run interrogate
 
 # 4. run the writers' room (Tentacle 2)
 npm run showrun
+
+# 5. schedule the week (Tentacle 3 — dry run, nothing posted)
+npm run write
 ```
 
-> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles.
+> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles. `write` schedules them to peak hours and logs to `posted.json`; add `--live` (once X API creds exist) to actually ship.
 
 ---
 
@@ -128,7 +131,7 @@ That's the **3x**. You bring the raw material — a person worth paying attentio
 
 - [x] 🐙 **Tentacle 1 — The Interrogator** · `npm run interrogate`
 - [x] 🐙 **Tentacle 2 — The Show Runner** · `npm run showrun`
-- [ ] 🐙 **Tentacle 3 — The Writer**
+- [x] 🐙 **Tentacle 3 — The Writer** · `npm run write` *(dry run; `--live` pending X API)*
 - [ ] 🐙 **Tentacle 4 — The Analyst**
 
 ---
