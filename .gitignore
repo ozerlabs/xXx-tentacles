@@ -12,6 +12,7 @@ out/
 # logs & local data
 *.log
 dossier.json
+showplan.json
 
 # os / editor
 .DS_Store

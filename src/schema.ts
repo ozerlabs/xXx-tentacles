@@ -55,6 +55,69 @@ export const TurnSchema = z.object({
 
 export type Turn = z.infer<typeof TurnSchema>;
 
+// ── Tentacle 2: The Show Runner ───────────────────────────────────────────────
+
+/** The kinds of beats the Show Runner can call. Free-form, but these are the lanes. */
+export const BEAT_TYPES = [
+  "hot_take",
+  "manufactured_beef",
+  "vulnerable_arc",
+  "callback_bit",
+  "reply_bait",
+  "flex",
+  "contrarian_thread",
+] as const;
+
+/** A planned slot in the week — the skeleton, before posts are written. */
+export const BeatSchema = z.object({
+  day: z.string().describe("e.g. 'Mon', 'Tue' — the slot in the week"),
+  type: z.string().describe(`one of: ${BEAT_TYPES.join(", ")}`),
+  topic: z.string().describe("what it's about — tied to the user's lanes / live drama"),
+  intent: z.string().describe("what this beat is supposed to DO for the arc / engagement"),
+});
+export type Beat = z.infer<typeof BeatSchema>;
+
+/** The week skeleton produced by the planning step. */
+export const WeekPlanSchema = z.object({
+  arc: z.string().describe("the week's narrative throughline — the story being told"),
+  beats: z.array(BeatSchema),
+});
+export type WeekPlan = z.infer<typeof WeekPlanSchema>;
+
+/** One candidate post — a single branch in the Tree of Thoughts. */
+export const PostCandidateSchema = z.object({
+  angle: z.string().describe("the strategic angle this branch takes"),
+  text: z.string().describe("the actual post, ready to ship"),
+  virality: z.number().min(0).max(10).describe("engagement potential — reward for extremes"),
+  on_voice: z.number().min(0).max(10).describe("how much it sounds like THIS user"),
+  risk: z.string().describe("ban/cancel risk in a few words — keep it spicy, not suicidal"),
+  why: z.string().describe("one line on why this lands"),
+});
+export type PostCandidate = z.infer<typeof PostCandidateSchema>;
+
+/** The Tree-of-Thoughts output for a single beat: branches + the chosen one. */
+export const BeatDraftSchema = z.object({
+  candidates: z.array(PostCandidateSchema).min(2),
+  chosen_index: z.number().int().min(0),
+  reasoning: z.string().describe("why the chosen branch beats the others"),
+});
+export type BeatDraft = z.infer<typeof BeatDraftSchema>;
+
+/** A fully-resolved slot: the beat plus its chosen post and the runners-up. */
+export type Slot = Beat & {
+  chosen: PostCandidate;
+  alternates: PostCandidate[];
+  reasoning: string;
+};
+
+/** The finished plan written to showplan.json. */
+export type ShowPlan = {
+  arc: string;
+  slots: Slot[];
+};
+
+// ──────────────────────────────────────────────────────────────────────────────
+
 /** Empty dossier to seed the first turn. */
 export const EMPTY_DOSSIER: Dossier = {
   identity: "",
