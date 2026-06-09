@@ -48,7 +48,7 @@ Every tentacle is an autonomous agent. Together they're your studio.
 | 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | ✅ **live** |
 | 🐙 | **The Show Runner** | Plans the week as a narrative arc, then Tree-of-Thoughts the spiciest post per beat. | ✅ **live** |
 | 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. Dry-run today; `--live` wires to X. | ✅ **live** |
-| 🐙 | **The Analyst** | Watches real engagement. Kills what flops, doubles down on what hits. | 🔜 |
+| 🐙 | **The Analyst** | Grades the week on real numbers, then steers the next one. Closes the loop. | ✅ **live** |
 
 <details>
 <summary><b>🐙 Tentacle 1 — The Interrogator</b> &nbsp;·&nbsp; <i>how it actually works</i></summary>
@@ -84,9 +84,14 @@ npm run showrun
 
 # 5. schedule the week (Tentacle 3 — dry run, nothing posted)
 npm run write
+
+# 6. grade the week + steer the next one (Tentacle 4)
+npm run analyze
+
+# …then run `npm run showrun` again — it now plans against the learnings. Loop closed.
 ```
 
-> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles. `write` schedules them to peak hours and logs to `posted.json`; add `--live` (once X API creds exist) to actually ship.
+> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles. `write` schedules them to peak hours and logs to `posted.json`; add `--live` (once X API creds exist) to actually ship. `analyze` measures engagement, grades it **on the numbers — not the model's opinion**, and writes `learnings.json` that the next `showrun` plans against.
 
 ---
 
@@ -132,7 +137,8 @@ That's the **3x**. You bring the raw material — a person worth paying attentio
 - [x] 🐙 **Tentacle 1 — The Interrogator** · `npm run interrogate`
 - [x] 🐙 **Tentacle 2 — The Show Runner** · `npm run showrun`
 - [x] 🐙 **Tentacle 3 — The Writer** · `npm run write` *(dry run; `--live` pending X API)*
-- [ ] 🐙 **Tentacle 4 — The Analyst**
+- [x] 🐙 **Tentacle 4 — The Analyst** · `npm run analyze` *(closes the loop; real metrics pending X API)*
+- [ ] 🔌 **Wire X API** — real posting + real metrics (`XApiTransport` / `XApiEngagement`)
 
 ---
 
