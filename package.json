@@ -3,12 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "3x your X.com with a swarm of autonomous agents. Tentacle 1: the Interrogator.",
+  "description": "3x your X.com with a swarm of autonomous agents. Data foundation: read-only X capture into a local buffer.",
   "scripts": {
-    "interrogate": "tsx src/interrogator.ts",
-    "showrun": "tsx src/showrunner.ts",
-    "write": "tsx src/writer.ts",
-    "analyze": "tsx src/analyst.ts",
     "x:login": "tsx src/x/login.ts",
     "x:recon": "tsx src/x/recon.ts",
     "x:ingest": "tsx src/x/ingest.ts"

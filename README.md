@@ -8,7 +8,7 @@
 
 <br>
 
-![status](https://img.shields.io/badge/status-tentacle_1_live-00d26a?style=flat-square)
+![status](https://img.shields.io/badge/status-data_foundation_live-00d26a?style=flat-square)
 ![stack](https://img.shields.io/badge/stack-TypeScript-3178c6?style=flat-square)
 ![brain](https://img.shields.io/badge/brain-DeepSeek-5b6ee1?style=flat-square)
 ![nuance](https://img.shields.io/badge/nuance-0%25-red?style=flat-square)
@@ -39,31 +39,34 @@ Most growth tools hand you a content calendar and a pat on the head. **xXx-tenta
 
 ---
 
-## 🐙 The tentacles
+## 🩸 What's live: the data foundation
 
-Every tentacle is an autonomous agent. Together they're your studio.
+Agents are only as sharp as what they know. So the foundation comes first — the part that reads your **real** X and remembers it.
+
+No paid API. No scraping farm. **Your own logged-in browser**, driven once by hand, then read like a human: it watches the timeline X's own app loads and harvests the data straight from the inside. Read-only — nothing posts, nothing touches your credentials.
+
+| Stage | Command | What it does |
+|---|---|---|
+| 🔑 **Sign in** | `npm run x:login` | You log in by hand once. Cookies saved locally, gitignored. No credentials in the repo. |
+| 👁️ **Recon** | `npm run x:recon` | Browses like a human and captures X's internal data — your posts, followers, timeline — plus a map of the API. |
+| 🗄️ **Ingest** | `npm run x:ingest` | Parses the capture into `buffer/x.db` — a local SQLite store of users, tweets, and the follow graph. |
+
+That buffer is the long-term memory the whole swarm will feed on.
+
+---
+
+## 🐙 The tentacles &nbsp;·&nbsp; <sub>in the lab</sub>
+
+Every tentacle is an autonomous agent. Together they're your studio. The first generation taught us the shape — now they're being rebuilt sharper on top of the data foundation.
 
 | | Tentacle | What it grips | Status |
 |---|---|---|---|
-| 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | ✅ **live** |
-| 🐙 | **The Show Runner** | Plans the week as a narrative arc, then Tree-of-Thoughts the spiciest post per beat. | ✅ **live** |
-| 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. Dry-run today; `--live` wires to X. | ✅ **live** |
-| 🐙 | **The Analyst** | Grades the week on real numbers, then steers the next one. Closes the loop. | ✅ **live** |
+| 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | 🧪 rebuilding |
+| 🐙 | **The Show Runner** | Plans the week as a narrative arc, then finds the spiciest post per beat. | 🧪 rebuilding |
+| 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. | 🧪 rebuilding |
+| 🐙 | **The Analyst** | Grades the week on real numbers, then steers the next one. Closes the loop. | 🧪 rebuilding |
 
-<details>
-<summary><b>🐙 Tentacle 1 — The Interrogator</b> &nbsp;·&nbsp; <i>how it actually works</i></summary>
-
-<br>
-
-Before anything can sell you, it has to *know* you. This one puts you in the chair and goes to work — roasting, profiling, prying. Your politics. Your taste. Your ego. Your vices. The stuff you'd never say at a dinner party.
-
-It keeps drilling, rating itself **0 → 10** on how well it gets you, and it does **not** stop until it hits a **10** — that *"fuck, I get this guy"* moment. You'll feel naked. That's the point.
-
-> A tentacle that doesn't know your edges can't sharpen them.
-
-Out comes a `dossier.json` — your voice, angles, enemies, and lanes — the long-term memory every other tentacle feeds on.
-
-</details>
+> A tentacle that doesn't know your edges can't sharpen them. That's why the data comes first — and why the next generation of agents reads from your real timeline, not a guess.
 
 ---
 
@@ -76,22 +79,17 @@ npm install
 # 2. add your key
 cp .env.example .env        # then paste your DEEPSEEK_API_KEY
 
-# 3. sit in the chair (Tentacle 1)
-npm run interrogate
+# 3. sign in to X by hand (once)
+npm run x:login
 
-# 4. run the writers' room (Tentacle 2)
-npm run showrun
+# 4. read your timeline from the inside (read-only — nothing posts)
+npm run x:recon
 
-# 5. schedule the week (Tentacle 3 — dry run, nothing posted)
-npm run write
-
-# 6. grade the week + steer the next one (Tentacle 4)
-npm run analyze
-
-# …then run `npm run showrun` again — it now plans against the learnings. Loop closed.
+# 5. store it in the local buffer
+npm run x:ingest
 ```
 
-> `interrogate` runs until the agent hits **10/10** on you, then writes `dossier.json` (type `quit` to bail — your funeral). `showrun` reads that dossier and writes `showplan.json` — a week of posts, each picked over rival angles. `write` schedules them to peak hours and logs to `posted.json`; add `--live` (once X API creds exist) to actually ship. `analyze` measures engagement, grades it **on the numbers — not the model's opinion**, and writes `learnings.json` that the next `showrun` plans against.
+> `x:login` opens a real browser — sign in by hand (username/password, **not** "Sign in with Google"), and your session is saved locally. `x:recon` reuses it to browse like a human and capture X's internal data to `.x-recon/`. `x:ingest` parses that into `buffer/x.db`. All read-only; nothing is ever posted.
 
 ---
 
@@ -134,11 +132,12 @@ That's the **3x**. You bring the raw material — a person worth paying attentio
 
 ## 🗺️ Roadmap
 
-- [x] 🐙 **Tentacle 1 — The Interrogator** · `npm run interrogate`
-- [x] 🐙 **Tentacle 2 — The Show Runner** · `npm run showrun`
-- [x] 🐙 **Tentacle 3 — The Writer** · `npm run write` *(dry run; `--live` pending X API)*
-- [x] 🐙 **Tentacle 4 — The Analyst** · `npm run analyze` *(closes the loop; real metrics pending X API)*
-- [ ] 🔌 **Wire X API** — real posting + real metrics (`XApiTransport` / `XApiEngagement`)
+- [x] 🩸 **Data foundation** — read your real X, store it · `x:login` → `x:recon` → `x:ingest`
+- [ ] 🔄 **Live crawler** — paginate past the first scroll, refresh on a schedule
+- [ ] 🐙 **The Interrogator** — profiles you into a dossier the swarm feeds on
+- [ ] 🐙 **The Show Runner** — plans the week as a narrative arc
+- [ ] 🐙 **The Writer** — schedules to peak hours and ships
+- [ ] 🐙 **The Analyst** — grades on real numbers from the buffer, steers the next week
 
 ---
 
