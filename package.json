@@ -8,16 +8,22 @@
     "interrogate": "tsx src/interrogator.ts",
     "showrun": "tsx src/showrunner.ts",
     "write": "tsx src/writer.ts",
-    "analyze": "tsx src/analyst.ts"
+    "analyze": "tsx src/analyst.ts",
+    "x:login": "tsx src/x/login.ts",
+    "x:recon": "tsx src/x/recon.ts",
+    "x:ingest": "tsx src/x/ingest.ts"
   },
   "dependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "better-sqlite3": "^12.10.0",
     "dotenv": "^16.4.5",
     "openai": "^4.67.0",
+    "playwright": "^1.60.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "^22.7.4",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2",
-    "@types/node": "^22.7.4"
+    "typescript": "^5.6.2"
   }
 }

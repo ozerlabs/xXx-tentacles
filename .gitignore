@@ -9,6 +9,12 @@ dist/
 .next/
 out/
 
+# X session + scraped data — secrets & personal data, never commit
+.x-session.json
+.x-account.json
+.x-recon/
+buffer/
+
 # logs & local data
 *.log
 dossier.json
