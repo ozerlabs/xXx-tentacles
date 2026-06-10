@@ -8,7 +8,7 @@
 
 <br>
 
-![status](https://img.shields.io/badge/status-data_foundation_live-00d26a?style=flat-square)
+![status](https://img.shields.io/badge/status-2_tentacles_live-00d26a?style=flat-square)
 ![stack](https://img.shields.io/badge/stack-TypeScript-3178c6?style=flat-square)
 ![brain](https://img.shields.io/badge/brain-DeepSeek-5b6ee1?style=flat-square)
 ![nuance](https://img.shields.io/badge/nuance-0%25-red?style=flat-square)
@@ -55,18 +55,18 @@ That buffer is the long-term memory the whole swarm will feed on.
 
 ---
 
-## 🐙 The tentacles &nbsp;·&nbsp; <sub>in the lab</sub>
+## 🐙 The tentacles
 
-Every tentacle is an autonomous agent. Together they're your studio. The first generation taught us the shape — now they're being rebuilt sharper on top of the data foundation.
+Every tentacle is an LLM-orchestrated agent reading off the buffer. Two are live; two are next. Across all of them: **numbers and evidence are computed in code, interpretation is the model's** — so an agent can be brutal, but it can't make a stat up.
 
 | | Tentacle | What it grips | Status |
 |---|---|---|---|
-| 🐙 | **The Interrogator** | Profiles you to the bone. Roasts, pries, and won't stop until it *gets* you. | 🧪 rebuilding |
-| 🐙 | **The Show Runner** | Plans the week as a narrative arc, then finds the spiciest post per beat. | 🧪 rebuilding |
-| 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. | 🧪 rebuilding |
-| 🐙 | **The Analyst** | Grades the week on real numbers, then steers the next one. Closes the loop. | 🧪 rebuilding |
+| 🐙 | **The Profiler** | Reads your real behavior and figures out *who you are* — archetype, voice, lanes, the brutal truth, and a positioning play. Outputs a talent dossier. | ✅ **live** · `npm run x:profile` |
+| 🐙 | **The Analyst** | Grades the account on real numbers and ships a McKinsey-grade growth diagnostic. | ✅ **live** · `npm run x:report` |
+| 🐙 | **The Show Runner** | Plans the week as a narrative arc, then finds the spiciest post per beat. | 🧪 next |
+| 🐙 | **The Writer** | Schedules each post to its peak hour and ships it. | 🧪 next |
 
-> A tentacle that doesn't know your edges can't sharpen them. That's why the data comes first — and why the next generation of agents reads from your real timeline, not a guess.
+> A tentacle that doesn't know your edges can't sharpen them. The Profiler and Analyst read straight from your real timeline — archetype and engagement rate, not a guess. Each runs as parallel read-passes → synthesis → a partner-review loop (evaluator-optimizer), per [`agent-orchestration.md`](agent-orchestration.md).
 
 ---
 
@@ -87,9 +87,17 @@ npm run x:recon
 
 # 5. store it in the local buffer
 npm run x:ingest
+
+# 6. grade the account — McKinsey-grade growth diagnostic (HTML)
+npm run x:report
+
+# 7. figure out who you are — talent dossier (HTML)
+npm run x:profile
 ```
 
 > `x:login` opens a real browser — sign in by hand (username/password, **not** "Sign in with Google"), and your session is saved locally. `x:recon` reuses it to browse like a human and capture X's internal data to `.x-recon/`. `x:ingest` parses that into `buffer/x.db`. All read-only; nothing is ever posted.
+>
+> `x:report` and `x:profile` run the LLM agents over the buffer and write self-contained HTML to `buffer/profile.html` and `buffer/dossier.html` — `open` either to view. Both need `DEEPSEEK_API_KEY` set; `x:report` falls back to a code-rendered report without one.
 
 ---
 
@@ -133,11 +141,12 @@ That's the **3x**. You bring the raw material — a person worth paying attentio
 ## 🗺️ Roadmap
 
 - [x] 🩸 **Data foundation** — read your real X, store it · `x:login` → `x:recon` → `x:ingest`
-- [ ] 🔄 **Live crawler** — paginate past the first scroll, refresh on a schedule
-- [ ] 🐙 **The Interrogator** — profiles you into a dossier the swarm feeds on
-- [ ] 🐙 **The Show Runner** — plans the week as a narrative arc
+- [x] 🐙 **The Profiler** — reads your behavior into a talent dossier · `x:profile`
+- [x] 🐙 **The Analyst** — grades the account on real numbers · `x:report`
+- [ ] 🔄 **Live crawler** — paginate past the first scroll, refresh on a schedule (unlocks change-over-time)
+- [ ] 🐙 **The Show Runner** — plans the week as a narrative arc against the dossier
 - [ ] 🐙 **The Writer** — schedules to peak hours and ships
-- [ ] 🐙 **The Analyst** — grades on real numbers from the buffer, steers the next week
+- [ ] 🔁 **Close the loop** — Analyst learnings steer the next Show Runner cycle
 
 ---
 
