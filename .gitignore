@@ -12,6 +12,7 @@ out/
 # X session + scraped data — secrets & personal data, never commit
 .x-session.json
 .x-account.json
+.x-write.json
 .x-recon/
 buffer/
 
