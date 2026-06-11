@@ -78,7 +78,10 @@ async function main() {
   let csrf: string | undefined;
   let saved = 0;
 
-  const { browser, page, handle } = await launch(true);
+  // Headed by default (we browse like a human). Scheduled cycles set
+  // RECON_HEADLESS=1 so the 3×/day capture runs windowless.
+  const headed = process.env.RECON_HEADLESS !== "1";
+  const { browser, page, handle } = await launch(headed);
 
   page.on("response", async (resp) => {
     const url = resp.url();

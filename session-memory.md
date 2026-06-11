@@ -57,9 +57,23 @@ Checked git tracking, full history, gitignore coverage, and runtime leak surface
 
 ---
 
+## 5. Growth loop — foundation (human-in-the-loop)
+
+Decision: build the full circle (capture 3×/day → understand → propose → approve → post → measure → learn), **human-in-the-loop first**, autonomy later once it performs.
+
+Keystone gap was **no metric history** — ingest upserted tweets/accounts on `rest_id`, overwriting metrics, so we could never see *change*. Fixed:
+- New time-series tables `tweet_metrics` and `account_history` (PK `rest_id, captured_at`); `db.ts` upserts now also append a per-capture snapshot. Idempotent (re-ingest same capture = same `captured_at`).
+- `recon.ts` honors `RECON_HEADLESS=1` → windowless capture for scheduled runs.
+- **`npm run x:cycle`** (`src/x/cycle.ts`) = recon (headless) → ingest, then prints + logs the follower delta to `buffer/cycles.jsonl`. Run 3×/day via cron (see header in cycle.ts).
+
+Verified end-to-end: 2 snapshots captured, 118 metric rows, follower delta tracked, and our own posted "ota updates" tweet is now in `tweet_metrics` (the attribution seam for future learnings).
+
 ## Open / next
 
-- [ ] Wire `voice.md` into a Writer tentacle so it reacts to fresh buffer captures (esp. the debunk shape, which needs a live claim to quote).
-- [ ] Optional: build `x:write delete <id>` (same browserless replay, learned once) so the swarm can self-clean instead of manual deletes.
-- [ ] Planned but not built: **Remotion motion-graphic video pipeline** from buffer/FactBase data — multi-agent (mirror the Analyst's Data-Room→workstreams→synthesis→partner-review pattern; designer.ts is the closest analog: model generates code, numbers computed in code). The plan discussion was interrupted to test the write path.
-- [ ] Watch: browserless CreateTweet is intermittent — if posting starts 4xx-ing or silently failing more, re-run `x:write capture` (X rotated the op) or `x:write login` (stale cookies).
+- [ ] **Next rung — the Proposer** (HITL brain): read the buffer `x:cycle` fills (fresh timeline + trends/stories + `voice.md` + FactBase), draft (a) original posts and (b) reply/quote targets from the timeline, score virality × on-voice, and write a ranked `buffer/queue.json`. Does NOT post.
+- [ ] **Then the approval queue** (`x:queue`): show proposals, approve → post via the headless `x:write`; `--dry` + per-item select. Closes the HITL action half.
+- [ ] **Then learnings** (needs ≥ a few days of `x:cycle` history): join `posted-live.jsonl` → `tweet_metrics`, see what *our* posts did, write real `learnings.json`, feed it back into the Proposer. Closes the circle.
+- [ ] Robustness before unattended: session-expiry detection + alert (cookies will die), cron failure alerts. Verify headless recon keeps capturing reliably over many days.
+- [ ] Wire `voice.md` into the Proposer's generation (esp. the debunk shape — needs a live claim to quote, which timeline discovery supplies).
+- [ ] Reply/quote in `x:write` are built but only `post` is exercised live — verify with `HEADED=1` on first real use.
+- [ ] Parked: **Remotion motion-graphic video pipeline** from FactBase (multi-agent, mirror Analyst Data-Room→workstreams→synthesis→review; designer.ts is the analog).

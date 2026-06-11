@@ -129,10 +129,37 @@ export class Buffer {
         captured_at      TEXT,
         PRIMARY KEY (rest_id, captured_at)
       );
+      -- Time series: tweets/accounts above keep only the LATEST metrics (upsert).
+      -- These two append one row per capture so we can see CHANGE over time —
+      -- the foundation the learning loop grades against.
+      CREATE TABLE IF NOT EXISTS tweet_metrics (
+        rest_id      TEXT,
+        captured_at  TEXT,
+        likes        INTEGER,
+        retweets     INTEGER,
+        replies      INTEGER,
+        quotes       INTEGER,
+        bookmarks    INTEGER,
+        views        INTEGER,
+        PRIMARY KEY (rest_id, captured_at)
+      );
+      CREATE TABLE IF NOT EXISTS account_history (
+        rest_id          TEXT,
+        captured_at      TEXT,
+        followers_count  INTEGER,
+        following_count  INTEGER,
+        statuses_count   INTEGER,
+        listed_count     INTEGER,
+        media_count      INTEGER,
+        favourites_count INTEGER,
+        PRIMARY KEY (rest_id, captured_at)
+      );
       CREATE INDEX IF NOT EXISTS idx_tweets_author  ON tweets(author_handle);
       CREATE INDEX IF NOT EXISTS idx_tweets_source  ON tweets(source);
       CREATE INDEX IF NOT EXISTS idx_edges_user     ON edges(user_rest_id);
       CREATE INDEX IF NOT EXISTS idx_accounts_owner ON accounts(is_owner);
+      CREATE INDEX IF NOT EXISTS idx_tmetrics_rest  ON tweet_metrics(rest_id);
+      CREATE INDEX IF NOT EXISTS idx_ahist_rest     ON account_history(rest_id);
     `);
   }
 
@@ -161,6 +188,29 @@ export class Buffer {
         is_owner: isOwner,
         captured_at: this.capturedAt,
       });
+
+    // Append this capture's snapshot to the follower/stats time series.
+    this.db
+      .prepare(
+        `INSERT INTO account_history (rest_id, captured_at, followers_count, following_count,
+            statuses_count, listed_count, media_count, favourites_count)
+         VALUES (@rest_id, @captured_at, @followers_count, @following_count,
+            @statuses_count, @listed_count, @media_count, @favourites_count)
+         ON CONFLICT(rest_id, captured_at) DO UPDATE SET
+           followers_count=excluded.followers_count, following_count=excluded.following_count,
+           statuses_count=excluded.statuses_count, listed_count=excluded.listed_count,
+           media_count=excluded.media_count, favourites_count=excluded.favourites_count`
+      )
+      .run({
+        rest_id: u.rest_id,
+        captured_at: this.capturedAt,
+        followers_count: u.followers_count,
+        following_count: u.following_count,
+        statuses_count: u.statuses_count,
+        listed_count: u.listed_count,
+        media_count: u.media_count,
+        favourites_count: u.favourites_count,
+      });
   }
 
   upsertTweet(t: ParsedTweet, source: TweetSource): void {
@@ -185,6 +235,27 @@ export class Buffer {
         created_ts: toEpochMs(t.created_at),
         source,
         captured_at: this.capturedAt,
+      });
+
+    // Append this capture's metrics to the per-tweet time series, so we can later
+    // see how a post's views/likes accrued (and grade what WE posted).
+    this.db
+      .prepare(
+        `INSERT INTO tweet_metrics (rest_id, captured_at, likes, retweets, replies, quotes, bookmarks, views)
+         VALUES (@rest_id, @captured_at, @likes, @retweets, @replies, @quotes, @bookmarks, @views)
+         ON CONFLICT(rest_id, captured_at) DO UPDATE SET
+           likes=excluded.likes, retweets=excluded.retweets, replies=excluded.replies,
+           quotes=excluded.quotes, bookmarks=excluded.bookmarks, views=excluded.views`
+      )
+      .run({
+        rest_id: t.rest_id,
+        captured_at: this.capturedAt,
+        likes: t.likes,
+        retweets: t.retweets,
+        replies: t.replies,
+        quotes: t.quotes,
+        bookmarks: t.bookmarks,
+        views: t.views,
       });
   }
 
@@ -246,6 +317,7 @@ export class Buffer {
       trends: one("SELECT COUNT(*) n FROM trends"),
       stories: one("SELECT COUNT(*) n FROM stories"),
       recommendations: one("SELECT COUNT(*) n FROM recommendations"),
+      metric_snapshots: one("SELECT COUNT(*) n FROM tweet_metrics"),
     };
   }
 

@@ -10,7 +10,8 @@
     "x:ingest": "tsx src/x/ingest.ts",
     "x:report": "tsx src/x/report.ts",
     "x:profile": "tsx src/x/profile.ts",
-    "x:write": "tsx src/x/writer.ts"
+    "x:write": "tsx src/x/writer.ts",
+    "x:cycle": "tsx src/x/cycle.ts"
   },
   "dependencies": {
     "@types/better-sqlite3": "^7.6.13",
